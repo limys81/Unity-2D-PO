@@ -15,9 +15,9 @@ TagManager:
   - UI
   - Ground
   - Player
-  - 
-  - 
-  - 
+  - PlayerHitBox
+  - Enemy
+  - EnemyHItBox
   - 
   - 
   - 

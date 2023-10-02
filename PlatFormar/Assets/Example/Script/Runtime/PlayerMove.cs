@@ -97,8 +97,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        if(canMove)
+        if (canMove)
             rigid.velocity = new Vector2(movingInput * speed, rigid.velocity.y);
+ 
     }
 
     private void JumpButton()
@@ -139,9 +140,8 @@ public class PlayerMove : MonoBehaviour
         isDashing = true;
         float origiinalGravity = rigid.gravityScale;
         rigid.gravityScale = 0f;
-        //rigid.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        rigid.AddForce(new Vector2(transform.localScale.x * dashingPower, 0f), ForceMode2D.Impulse);
-
+        rigid.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+     
         //trail.emitting = true;
         yield return new WaitForSeconds(dasingTime);
         //trail.emitting = false;
