@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TouchingDirection : MonoBehaviour
 {
     public ContactFilter2D castFilter;
     public float groundDistance = 0.05f;
-    public float WallDistance = 0.2f;
+    public float WallDistance = 0.3f;
     
     CapsuleCollider2D touchingCol;
     Animator animator;
 
     RaycastHit2D[] groundHits = new RaycastHit2D[5];
-    RaycastHit2D[] WallHits = new RaycastHit2D[5];
+    RaycastHit2D[] WallHits = new RaycastHit2D[10];
 
     [SerializeField] private bool _isGrounded;
 
@@ -46,7 +47,7 @@ public class TouchingDirection : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void FixedUpdate()
+    private void Update()
     {
         IsGrounded = touchingCol.Cast(Vector2.down, castFilter, groundHits, groundDistance) > 0;
         IsWallDitected = touchingCol.Cast(wallCheckDirection, castFilter, WallHits, WallDistance) > 0;

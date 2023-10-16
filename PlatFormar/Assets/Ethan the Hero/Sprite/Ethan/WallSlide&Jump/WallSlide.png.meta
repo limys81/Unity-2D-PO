@@ -168,9 +168,9 @@ TextureImporter:
       name: WallSlide_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 33
         y: 0
-        width: 80
+        width: 47
         height: 80
       alignment: 7
       pivot: {x: 0.5, y: 0}

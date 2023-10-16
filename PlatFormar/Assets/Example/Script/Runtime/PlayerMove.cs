@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(Damageable))]
 
 /* 플레이어 */
 public class PlayerMove : MonoBehaviour
@@ -14,6 +15,8 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private TrailRenderer trail;
 
+    Damageable damageable;
+
     [Header("Player Move Info")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
@@ -23,6 +26,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool canMove = true;
 
+    private bool isRunning;
     private bool canDoubleJump;
     private bool canWallSlide;
     private bool isWallSliding;
@@ -35,9 +39,10 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Vector2 wallJumpDirection;
 
     [Header("Collision Info")]
+    [SerializeField] private LayerMask whatIsGround;
+
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius;
-    [SerializeField] private LayerMask whatIsGround;
 
     [SerializeField] private Transform wallCheck;
     [SerializeField] private float wallCheckDistance;
@@ -45,14 +50,26 @@ public class PlayerMove : MonoBehaviour
     private bool isGrounded;
     private bool isWallDetected;
 
-
     #endregion // 변수
+
+    public bool CanMove { get
+        {
+            return anim.GetBool("canMove");
+        }
+    }
+
+    public bool IsAlive { get
+        {
+            return anim.GetBool("isAlive");
+        }
+    }
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        damageable = GetComponent<Damageable>();
     }
 
     private void Update()
@@ -76,11 +93,12 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y * 0.1f); // Wall Slide 속도
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             StartCoroutine(Dash());
+            canMove = false;
         }
-
+        
         Move();
     }
 
@@ -97,9 +115,10 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        if (canMove)
+        if (canMove && IsAlive && !isDashing && !damageable.LockVelocity)
+        {
             rigid.velocity = new Vector2(movingInput * speed, rigid.velocity.y);
- 
+        }
     }
 
     private void JumpButton()
@@ -123,7 +142,8 @@ public class PlayerMove : MonoBehaviour
 
     private void Jump()
     {
-        rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
+        if(IsAlive)
+            rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
     }
 
     private void WallJump()
@@ -151,7 +171,6 @@ public class PlayerMove : MonoBehaviour
         yield return new WaitForSeconds(dashingCoolDown);
 
         canDash = true;
-
     }
 
     private void Flip()
@@ -163,7 +182,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FlipController()
     {
-        if (isGrounded && isWallDetected)
+        if (isGrounded && isWallDetected && IsAlive)
         {
             if (facingRight && movingInput < 0)
                 Flip();
@@ -177,6 +196,11 @@ public class PlayerMove : MonoBehaviour
             Flip();
     }
 
+    public void OnHit(int damage, Vector2 knockback)
+    {
+        rigid.velocity = new Vector2(knockback.x, rigid.velocity.y + knockback.y);
+    }
+
     private void AnimatorController()
     {
         bool isRunning = rigid.velocity.x != 0;
@@ -188,13 +212,13 @@ public class PlayerMove : MonoBehaviour
         anim.SetBool("isWallDitected", isWallDetected);
         anim.SetBool("isDashing", isDashing);
     }
-
+     
     private void CollisionCheck()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
         isWallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance, whatIsGround);
-
+        
         if (isWallDetected && rigid.velocity.y < 0)
             canWallSlide = true;
 

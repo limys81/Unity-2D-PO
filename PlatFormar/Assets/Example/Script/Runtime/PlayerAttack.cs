@@ -13,11 +13,6 @@ public class PlayerAttack : MonoBehaviour
     public int attackCount = 0;
     float lastClickedTime = 0;
     public float maxComboDelay;
-
-    [Header("Player Attack Power Value")]
-    public float Attack01Power;
-    public float Attack02Power;
-    public float Attack03Power;
     #endregion // º¯¼ö
 
     private void Awake()
