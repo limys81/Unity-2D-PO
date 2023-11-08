@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirection), typeof(Damageable))]
 
@@ -8,6 +9,7 @@ public class Skeleton : MonoBehaviour
 {
     public float speed;
     public float walkStopRate;
+
     public DetectionZone attackZone;
     public DetectionZone cliffDetectionZone;
 

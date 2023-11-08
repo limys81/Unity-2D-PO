@@ -91,7 +91,7 @@ MonoBehaviour:
   updateOnStateMachineEnter: 0
   updateOnStateMachineExit: 0
   valueOnEnter: 0
-  valueOnExit: 1
+  valueOnExit: 0.5
 --- !u!114 &-5682634478998399600
 MonoBehaviour:
   m_ObjectHideFlags: 1

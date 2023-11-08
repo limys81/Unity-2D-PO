@@ -13,11 +13,14 @@ public class PlayerAttack : MonoBehaviour
     public int attackCount = 0;
     float lastClickedTime = 0;
     public float maxComboDelay;
+
+    PlayerMove playermove;
     #endregion // º¯¼ö
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        playermove = GetComponent<PlayerMove>();
     }
 
     private void Update()
@@ -25,12 +28,12 @@ public class PlayerAttack : MonoBehaviour
         OnAttack();
     }
 
-    private void OnAttack()
+    public void OnAttack()
     {
         if (Time.time - lastClickedTime > maxComboDelay)
             attackCount = 0;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !playermove.isRunning && !playermove.isDashing)
         {
             lastClickedTime = Time.time;
             attackCount++;

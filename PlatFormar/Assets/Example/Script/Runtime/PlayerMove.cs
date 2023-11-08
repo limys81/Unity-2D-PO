@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     private TrailRenderer trail;
 
     Damageable damageable;
+    PlayerAttack playerAttack;
 
     [Header("Player Move Info")]
     [SerializeField] private float speed;
@@ -26,12 +27,12 @@ public class PlayerMove : MonoBehaviour
 
     private bool canMove = true;
 
-    private bool isRunning;
-    private bool canDoubleJump;
-    private bool canWallSlide;
-    private bool isWallSliding;
-    private bool canDash;
-    private bool isDashing;
+    public bool isRunning;
+    public bool canDoubleJump;
+    public bool canWallSlide;
+    public bool isWallSliding;
+    public bool canDash;
+    public bool isDashing;
 
     private bool facingRight = true;
     private float movingInput;
@@ -64,12 +65,25 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    public float DashingCoolDown
+    {
+        get
+        {
+            return anim.GetFloat("dashingCoolDown");
+        }
+        private set
+        {
+            anim.SetFloat("dashingCoolDown", Mathf.Max(value, 0));
+        }
+    }
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         damageable = GetComponent<Damageable>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     private void Update()
@@ -96,9 +110,13 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             StartCoroutine(Dash());
-            canMove = false;
         }
-        
+
+        if (DashingCoolDown > 0)
+        {
+            DashingCoolDown -= Time.deltaTime;
+        }
+
         Move();
     }
 
@@ -156,21 +174,25 @@ public class PlayerMove : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        canDash = false;
-        isDashing = true;
-        float origiinalGravity = rigid.gravityScale;
-        rigid.gravityScale = 0f;
-        rigid.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-     
-        //trail.emitting = true;
-        yield return new WaitForSeconds(dasingTime);
-        //trail.emitting = false;
+        if(isGrounded && IsAlive && DashingCoolDown == 0 && rigid.velocity.y == 0 && playerAttack.attackCount == 0)
+        {
+            canDash = false;
+            isDashing = true;
+            isRunning = false;
+            float origiinalGravity = rigid.gravityScale;
+            rigid.gravityScale = 0f;
+            rigid.velocity = new Vector2(transform.localScale.x * facingDirection * dashingPower, 0f);
 
-        rigid.gravityScale = origiinalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCoolDown);
+            //trail.emitting = true;
+            yield return new WaitForSeconds(dasingTime);
+            //trail.emitting = false;
 
-        canDash = true;
+            rigid.gravityScale = origiinalGravity;
+            isDashing = false;
+            yield return new WaitForSeconds(dashingCoolDown);
+
+            canDash = true;
+        }
     }
 
     private void Flip()
@@ -203,7 +225,10 @@ public class PlayerMove : MonoBehaviour
 
     private void AnimatorController()
     {
-        bool isRunning = rigid.velocity.x != 0;
+        if (!isDashing)
+        {
+            isRunning = rigid.velocity.x != 0;
+        }
 
         anim.SetFloat("yVelocity", rigid.velocity.y);
         anim.SetBool("isRunning", isRunning);
