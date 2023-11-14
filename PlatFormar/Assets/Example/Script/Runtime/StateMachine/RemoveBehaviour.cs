@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RemoveBehaviour : StateMachineBehaviour
 {
-    public float fadeTIme = 0.5f;
+    public float fadeTime = 0.5f;
     private float timeElapsed = 0f;
     SpriteRenderer spriteRenderer;
     GameObject objToRemove;
@@ -24,11 +24,11 @@ public class RemoveBehaviour : StateMachineBehaviour
     {
         timeElapsed += Time.deltaTime;
 
-        float newAlpha = startColor.a * (1 - (timeElapsed / fadeTIme));
+        float newAlpha = startColor.a * (1 - (timeElapsed / fadeTime));
 
         spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
 
-        if(timeElapsed > fadeTIme)
+        if(timeElapsed > fadeTime)
         {
             Destroy(objToRemove);
         }
