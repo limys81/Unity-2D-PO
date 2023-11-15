@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Example/Scenes/MainMenu.unity
+    path: Assets/2D PlatFormer/Scenes/MainMenu.unity
     guid: dcd1f42a7afe3eb46a26844bccf746ef
   - enabled: 1
-    path: Assets/Example/Scenes/GamePlayScene.unity
+    path: Assets/2D PlatFormer/Scenes/GamePlayScene.unity
     guid: 76b5b335805823d44bb720c16e68a624
   - enabled: 1
     path: Assets/Example/Scenes/QuitScene.unity
