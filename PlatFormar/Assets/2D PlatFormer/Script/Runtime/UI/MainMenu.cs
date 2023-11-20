@@ -27,6 +27,14 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("GamePlayScene");
     }
 
+    public IEnumerator GoToMainMenuScene()
+    {
+        fade.FadeIn();
+        yield return new WaitForSeconds(2);
+
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void OnClickGameStartBtn()
     {
         StartCoroutine(GoToGamePlayScene());
@@ -40,6 +48,11 @@ public class MainMenu : MonoBehaviour
     public void OnClickControllerBtn()
     {
 
+    }
+
+    public void OnClickGoToMainMenuBtn()
+    {
+        StartCoroutine(GoToMainMenuScene());
     }
 
     public void OnClickQuitAgreeBtn()

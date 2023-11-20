@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4923448857065266309}
   - component: {fileID: 107840550551349013}
   - component: {fileID: 2345189262763827150}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: SpellAttackZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 5974956258714109885}
   - component: {fileID: 3604534494000926205}
   - component: {fileID: 1862942788782314798}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

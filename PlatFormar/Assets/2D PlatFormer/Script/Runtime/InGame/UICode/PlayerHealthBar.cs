@@ -4,21 +4,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
+public class PlayerHealthBar : MonoBehaviour
 {
     public Slider healthSlider;
     public TMP_Text healthBarText;
 
     Damageable playerDamageable;
-   // Damageable bossMosterDamageable;
 
     private void Awake()
     {
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
-       // GameObject BossMonster = GameObject.FindGameObjectWithTag("BossMonster");
 
         playerDamageable = Player.GetComponent<Damageable>();
-       // bossMosterDamageable = BossMonster.GetComponent<Damageable>();
     }
 
     void Start()
@@ -30,13 +27,11 @@ public class HealthBar : MonoBehaviour
     private void OnEnable()
     {
         playerDamageable.healthChanged.AddListener(OnHealthChanged);
-       // bossMosterDamageable.healthChanged.AddListener(OnHealthChanged);
     }
 
     private void OnDisable()
     {
         playerDamageable.healthChanged.RemoveListener(OnHealthChanged);
-       // bossMosterDamageable.healthChanged.RemoveListener(OnHealthChanged);
     }
 
     private float CalculateSliderPercentage(float currentHealth, float maxHealth)

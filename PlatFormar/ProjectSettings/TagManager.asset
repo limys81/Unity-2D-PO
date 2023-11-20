@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Trap
   - Wall
+  - BossMonster
   layers:
   - Default
   - TransparentFX
@@ -17,11 +18,11 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - BossMonster
   - PlayerHitBox
   - EnemyHItBox
   - GroundDetection
   - Pickup
+  - 
   - 
   - 
   - 

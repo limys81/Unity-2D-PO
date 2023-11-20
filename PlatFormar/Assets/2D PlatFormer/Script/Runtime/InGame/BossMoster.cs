@@ -21,6 +21,8 @@ public class BossMoster : MonoBehaviour
     float spellAttackCoolDown = 1.5f;
     float spellAttackTime = 0.25f;
 
+    public GameObject bossHealthBar;
+
     private Transform player;
 
     public DetectionZone attackZone;
@@ -108,6 +110,10 @@ public class BossMoster : MonoBehaviour
         {
             StartCoroutine(SpellAttack());
             spellAttackCoolTime = 0;
+        }
+        if (trackingState)
+        {
+            bossHealthBar.SetActive(true);
         }
     }
 
