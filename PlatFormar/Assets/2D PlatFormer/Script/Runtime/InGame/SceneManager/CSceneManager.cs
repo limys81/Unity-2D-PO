@@ -19,8 +19,6 @@ public class CSceneManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            IsPause();
-
             if (setUpUI.activeSelf)
             {
                 setUpUI.SetActive(false);

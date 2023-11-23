@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(Damageable))]
 
@@ -31,6 +33,9 @@ public class Player : MonoBehaviour
     public bool canDoubleJump;
     public bool canWallSlide;
     public bool isWallSliding;
+
+    [Header("Dash")]
+    public GameObject dashCoolTimeImg;
     public bool canDash;
     public bool isDashing;
 
@@ -176,6 +181,7 @@ public class Player : MonoBehaviour
     {
         if(isGrounded && IsAlive && DashingCoolDown == 0 && rigid.velocity.y == 0 && playerAttack.attackCount == 0)
         {
+            dashCoolTimeImg.SetActive(true);
             canDash = false;
             isDashing = true;
             isRunning = false;
