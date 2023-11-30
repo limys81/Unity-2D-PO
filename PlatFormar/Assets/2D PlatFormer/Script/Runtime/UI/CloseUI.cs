@@ -20,7 +20,7 @@ public class CloseUI : MonoBehaviour
     private IEnumerator CloseAfterDelay()
     {
         anim.SetTrigger("close");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         gameObject.SetActive(false);
         anim.SetTrigger("close");
     }

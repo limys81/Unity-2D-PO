@@ -465,6 +465,13 @@ MonoBehaviour:
   dashingPower: 20
   dasingTime: 0.2
   dashingCoolDown: 1
+  isRunning: 0
+  canDoubleJump: 0
+  canWallSlide: 0
+  isWallSliding: 0
+  dashCoolTimeImg: {fileID: 0}
+  canDash: 0
+  isDashing: 0
   wallJumpDirection: {x: 10, y: 20}
   whatIsGround:
     serializedVersion: 2
@@ -487,9 +494,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCount: 0
   maxComboDelay: 1.2
-  Attack01Power: 0.5
-  Attack02Power: 0.5
-  Attack03Power: 0.8
 --- !u!114 &5982400992116799444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +553,63 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f915a94a-eb72-4f52-ba46-4dcc798a4e9c
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 939991af-8d29-47bd-9be8-82f441b0275e
+    m_ActionName: Player/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 809b093d-4921-4fcf-a357-678986c0f4dd
+    m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5b436787-9c46-4134-9c2d-b952e1c5d94b
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b938f89c-45c1-441f-a770-62e41eff8858
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 361fd3d0-7fda-4333-96a7-6858fb4ce30b
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b6347ac1-f497-4a37-b4ff-59f1f372c0e7
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1a580d83-3266-4760-85b9-db75b2e8c9fe
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 763da91a-a184-42eb-84ff-20e0b26dfba7
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bb0828a5-95f4-46f4-b559-92b377d8de28
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 10db46b3-b049-4d8a-af39-d3b8ad9ae3fd
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 00f58f57-787a-453f-9c85-ce5c04eabbd5
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fe31f2f6-ad96-4353-8bcf-4c3968cf7df4
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 946f6f24-3417-41c6-950f-fbce5803cb37
+    m_ActionName: UI/Escape[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

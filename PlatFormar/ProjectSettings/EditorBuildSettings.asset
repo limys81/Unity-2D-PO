@@ -12,9 +12,12 @@ EditorBuildSettings:
     path: Assets/2D PlatFormer/Scenes/MainMenu.unity
     guid: dcd1f42a7afe3eb46a26844bccf746ef
   - enabled: 1
-    path: Assets/2D PlatFormer/Scenes/GamePlayScene.unity
-    guid: 76b5b335805823d44bb720c16e68a624
+    path: Assets/2D PlatFormer/Scenes/StageScene.unity
+    guid: 1922dfdf1c7c32549a1a06103b854e2e
   - enabled: 1
+    path: Assets/2D PlatFormer/Scenes/GamePlayScene01.unity
+    guid: 76b5b335805823d44bb720c16e68a624
+  - enabled: 0
     path: Assets/Example/Scenes/QuitScene.unity
     guid: b21dd8d926e03934d86b3ae22003a446
   m_configObjects: {}

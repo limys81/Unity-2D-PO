@@ -106,7 +106,7 @@ public class BossMoster : MonoBehaviour
             spellAttackCoolTime += Time.deltaTime;
         }
 
-        if (spellAttackCoolTime > 10)
+        if (spellAttackCoolTime > 5)
         {
             StartCoroutine(SpellAttack());
             spellAttackCoolTime = 0;
@@ -202,7 +202,7 @@ public class BossMoster : MonoBehaviour
             for(int i = 0; i < 5; i++)
             {
                 GameObject spellAttackZone = Instantiate(spellAttackZonePrefab, transform.position, transform.rotation);
-                spellAttackZone.transform.position = new Vector3((player.transform.position.x - 14) + 7 * i, -5, 0);
+                spellAttackZone.transform.position = new Vector3((player.transform.position.x - 14) + 7 * i, player.transform.position.y + 5.5f, 0);
             }
         }
     }

@@ -19,25 +19,17 @@ public class MainMenu : MonoBehaviour
         
     }
 
-    public IEnumerator GoToGamePlayScene()
+    public void GoToStageScene()
     {
-        fade.FadeIn();
-        yield return new WaitForSeconds(2);
-
-        SceneManager.LoadScene("GamePlayScene");
+        SceneManager.LoadScene("StageScene");
     }
 
     public IEnumerator GoToMainMenuScene()
     {
         fade.FadeIn();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSecondsRealtime(2);
 
         SceneManager.LoadScene("MainMenu");
-    }
-
-    public void OnClickGameStartBtn()
-    {
-        StartCoroutine(GoToGamePlayScene());
     }
 
     public void OnClickOptionBtn()

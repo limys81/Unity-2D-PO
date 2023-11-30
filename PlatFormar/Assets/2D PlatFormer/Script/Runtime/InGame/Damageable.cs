@@ -77,6 +77,18 @@ public class Damageable : MonoBehaviour
         }
     }
 
+    public bool IsInvincible
+    {
+        get
+        {
+            return anim.GetBool("isInvincible");
+        }
+        set
+        {
+            anim.SetBool("isInvincible", value);
+        }
+    }
+
     private void Awake()
     {
         anim = GetComponent<Animator>();

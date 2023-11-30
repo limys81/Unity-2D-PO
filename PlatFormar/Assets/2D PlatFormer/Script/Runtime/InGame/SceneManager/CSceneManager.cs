@@ -7,6 +7,7 @@ public class CSceneManager : MonoBehaviour
 {
     public bool isPause = false;
 
+    public GameObject fadeImg;
     public GameObject setUpUI;
     Vector2 creatPoint;
 
@@ -19,6 +20,8 @@ public class CSceneManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            IsPause();
+
             if (setUpUI.activeSelf)
             {
                 setUpUI.SetActive(false);
@@ -28,6 +31,8 @@ public class CSceneManager : MonoBehaviour
                 setUpUI.SetActive(true);
             }
         }
+
+        fadeImg.SetActive(true);
     }
 
     public void IsPause()

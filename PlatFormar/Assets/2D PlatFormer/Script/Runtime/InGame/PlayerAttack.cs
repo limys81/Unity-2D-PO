@@ -33,7 +33,7 @@ public class PlayerAttack : MonoBehaviour
         if (Time.time - lastClickedTime > maxComboDelay)
             attackCount = 0;
 
-        if (Input.GetMouseButtonDown(0) && !player.isRunning && !player.isDashing)
+        if (Input.GetMouseButtonDown(0) && !player.isRunning && !player.isDashing && Time.timeScale > 0)
         {
             lastClickedTime = Time.time;
             attackCount++;
