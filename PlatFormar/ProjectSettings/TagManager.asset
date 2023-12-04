@@ -8,6 +8,7 @@ TagManager:
   - Trap
   - Wall
   - BossMonster
+  - Diamond
   layers:
   - Default
   - TransparentFX

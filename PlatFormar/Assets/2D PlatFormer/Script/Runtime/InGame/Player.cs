@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private TrailRenderer trail;
 
+    public DiamondManager dm;
     Damageable damageable;
     PlayerAttack playerAttack;
 
@@ -227,6 +228,15 @@ public class Player : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         rigid.velocity = new Vector2(knockback.x, rigid.velocity.y + knockback.y);
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Diamond"))
+        {
+            Destroy(other.gameObject);
+            dm.diamondCount++;
+        }
     }
 
     private void AnimatorController()

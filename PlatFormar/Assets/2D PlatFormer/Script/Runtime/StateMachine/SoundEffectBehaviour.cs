@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundEffectBehaviour : StateMachineBehaviour
 {
+    public AudioSource audioSource;
     public AudioClip soundPlay;
-    public float volume = 1.0f;
+    public float volume;
     public bool playOnEnter = true, playOnExit = false, PlayAfterDelay = false;
 
     public float playDelay = 0.25f;
