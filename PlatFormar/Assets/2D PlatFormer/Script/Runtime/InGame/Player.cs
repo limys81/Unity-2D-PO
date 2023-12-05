@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Experimental.GlobalIllumination;
 
 [RequireComponent(typeof(Damageable))]
 
@@ -65,12 +66,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool IsAlive { get
-        {
-            return anim.GetBool("isAlive");
-        }
-    }
-
     public float DashingCoolDown
     {
         get
@@ -95,10 +90,14 @@ public class Player : MonoBehaviour
     private void Update()
     {
         CheckInput();
-
         CollisionCheck();
         FlipController();
         AnimatorController();
+
+        if (!damageable.IsAlive)
+        {
+            GameManager.instance.GameOver();
+        }
 
         if (isGrounded)
         {
@@ -139,7 +138,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        if (canMove && IsAlive && !isDashing && !damageable.LockVelocity)
+        if (canMove && !isDashing && !damageable.LockVelocity)
         {
             rigid.velocity = new Vector2(movingInput * speed, rigid.velocity.y);
         }
@@ -166,8 +165,7 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if(IsAlive)
-            rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
+        rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
     }
 
     private void WallJump()
@@ -180,7 +178,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        if(isGrounded && IsAlive && DashingCoolDown == 0 && rigid.velocity.y == 0 && playerAttack.attackCount == 0)
+        if(isGrounded && DashingCoolDown == 0 && rigid.velocity.y == 0 && playerAttack.attackCount == 0)
         {
             dashCoolTimeImg.SetActive(true);
             canDash = false;
@@ -211,7 +209,7 @@ public class Player : MonoBehaviour
 
     private void FlipController()
     {
-        if (isGrounded && isWallDetected && IsAlive)
+        if (isGrounded && isWallDetected)
         {
             if (facingRight && movingInput < 0)
                 Flip();

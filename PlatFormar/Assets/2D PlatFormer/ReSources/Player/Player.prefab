@@ -460,6 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   rigid: {fileID: 0}
+  dm: {fileID: 0}
   speed: 7
   jumpForce: 20
   dashingPower: 20
