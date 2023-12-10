@@ -233,7 +233,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Diamond"))
         {
             Destroy(other.gameObject);
-            dm.diamondCount++;
+            dm.curdiamondCount++;
         }
     }
 

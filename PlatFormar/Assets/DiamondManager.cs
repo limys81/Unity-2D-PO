@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 
 public class DiamondManager : MonoBehaviour
 {
-    public int diamondCount;
+    public int curdiamondCount;
     public int maxDiamondCount = 5;
     public TMP_Text diamondText;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    public int SaveDiamondCount;
+
+    void Awake()
     {
-        
+        SaveDiamondCount = PlayerPrefs.GetInt("SaveDiamond");
+        PlayerPrefs.SetInt("SaveDiamond", curdiamondCount);
     }
 
     // Update is called once per frame
     void Update()
     {
-        diamondText.text = diamondCount.ToString() + " / " + maxDiamondCount.ToString();
+        diamondText.text = curdiamondCount.ToString() + " / " + maxDiamondCount.ToString();
     }
 }

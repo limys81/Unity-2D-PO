@@ -96,6 +96,11 @@ public class BossMoster : MonoBehaviour
 
         HasMoveTarget = MoveZone.detectedColliders.Count > 0;
 
+        if (!damageable.IsAlive)
+        {
+            GameManager.instance.StageClear();
+        }
+
         if (AttackCooldown > 0)
         {
             AttackCooldown -= Time.deltaTime;

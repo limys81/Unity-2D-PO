@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject fadeImg;
     public GameObject setUpUI;
     public GameObject GameOverUI;
+    public GameObject StageClearUI;
     Vector2 creatPoint;
 
     private void Start()
@@ -37,6 +38,19 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         GameOverUI.SetActive(true);
+        fadeImg.SetActive(true);
+        IsPause();
+    }
+
+    public void StageClear()
+    {
+        StartCoroutine(StageClearRoutine());
+    }
+
+    IEnumerator StageClearRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+        StageClearUI.SetActive(true);
         fadeImg.SetActive(true);
         IsPause();
     }
