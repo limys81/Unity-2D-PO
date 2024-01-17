@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private TrailRenderer trail;
 
-    public DiamondManager dm;
     Damageable damageable;
     PlayerAttack playerAttack;
 
@@ -233,7 +232,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Diamond"))
         {
             Destroy(other.gameObject);
-            dm.curdiamondCount++;
+            DiamondScore.instance.AddPoint();
         }
     }
 

@@ -7,7 +7,7 @@ public class TouchingDirection : MonoBehaviour
 {
     public ContactFilter2D castFilter;
     public float groundDistance = 0.05f;
-    public float WallDistance = 0.3f;
+    public float WallDistance = 0.1f;
     
     CapsuleCollider2D touchingCol;
     Animator animator;

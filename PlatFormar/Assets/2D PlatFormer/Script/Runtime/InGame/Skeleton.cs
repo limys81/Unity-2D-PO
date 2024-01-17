@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirection), typeof(Damageable))]
 
 public class Skeleton : MonoBehaviour
 {
-    public float speed;
-    public float walkStopRate;
+    public float walkAcceleration = 30f;
+    public float maxspeed = 3;
+    public float walkStopRate = 0.05f;
 
     public DetectionZone attackZone;
     public DetectionZone cliffDetectionZone;
@@ -81,7 +81,7 @@ public class Skeleton : MonoBehaviour
     {
         HasTarget = attackZone.detectedColliders.Count > 0;
 
-        if(AttackCooldown > 0)
+        if (AttackCooldown > 0)
         {
             AttackCooldown -= Time.deltaTime;
         }
@@ -95,9 +95,9 @@ public class Skeleton : MonoBehaviour
         }
         if (!damageable.LockVelocity)
         {
-            if (CanMove && !_hasTarget)
+            if (CanMove && touchingDirection.IsGrounded)
             {
-                rigid.velocity = new Vector2(speed * walkDirectionVector.x, rigid.velocity.y);
+                rigid.velocity = new Vector2(Mathf.Clamp(rigid.velocity.x + (walkAcceleration * walkDirectionVector.x * Time.fixedDeltaTime), -maxspeed, maxspeed), rigid.velocity.y);
             }
             else
             {

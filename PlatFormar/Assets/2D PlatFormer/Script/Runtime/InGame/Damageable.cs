@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class Damageable : MonoBehaviour
 {
@@ -122,7 +123,6 @@ public class Damageable : MonoBehaviour
 
             return true;
         }
-
         return false;
     }
 
