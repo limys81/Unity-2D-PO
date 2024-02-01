@@ -6,7 +6,6 @@ public class Attack : MonoBehaviour
 {
     public static Attack Instance;
 
-    public int shieldDamage = 0;
     public int attackDamage;
 
     public Vector2 Knockback = Vector2.zero;

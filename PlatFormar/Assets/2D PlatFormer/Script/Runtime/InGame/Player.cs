@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.Playables;
 
 [RequireComponent(typeof(Damageable))]
 

@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - BossMonster
   - Diamond
+  - CutScene
   layers:
   - Default
   - TransparentFX

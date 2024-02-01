@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Blocking : MonoBehaviour
 {
@@ -10,31 +12,23 @@ public class Blocking : MonoBehaviour
     public float blockingCoolTime = 0;
 
     public bool isBlocking;
-    public bool isCounterAttack = false;
+
+    public GameObject blockTextPrefab;
 
     Animator anim;
-    Damageable damageable;
     Skeleton skeleton;
+    Damageable damageable;
+    public Canvas gameCanvas;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        damageable = GetComponent<Damageable>();
         skeleton = GetComponent<Skeleton>();
+        damageable = GetComponent<Damageable>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        IsBlocking();
-    }
-
-    private void FixedUpdate()
-    {
-        AnimatorController();
-    }
-
-    private void IsBlocking()
     {
         if (skeleton.HasTarget && !isBlocking)
         {
@@ -43,23 +37,40 @@ public class Blocking : MonoBehaviour
 
         if (blockingCoolTime > 3)
         {
-            isBlocking = true;
+            StartCoroutine(Block());
             blockingCoolTime = 0;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        AnimatorController();
+    }
+
+    public IEnumerator Block()
+    {
+        isBlocking = true;
+        damageable.isInvincible = true;
+        damageable.invincibilityTime = blockingTime;
+        yield return new WaitForSeconds(blockingTime);
+
+        isBlocking = false;
+        damageable.invincibilityTime = 0.25f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isBlocking)
         {
+            Vector3 spawnPosition = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+            Instantiate(blockTextPrefab, spawnPosition, Quaternion.identity, gameCanvas.transform);
             isBlocking = false;
-            isCounterAttack = true;
+            anim.SetTrigger("isCounterAttack");
         }
     }
 
     private void AnimatorController()
     {
         anim.SetBool("isBlocking", isBlocking);
-        anim.SetBool("isCounterAttack", isCounterAttack);
     }
 }
